@@ -1,29 +1,25 @@
 {
-  "name": "nuxt-app",
+  "name": "usa-dance-charleston-signin-sheet",
   "type": "module",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "firebase": "^10.12.5",
-    "nuxt": "^3.12.4",
-    "nuxt-vuefire": "^1.0.3",
-    "vue": "latest"
+    "vue": "^3.4.37"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.25.0",
-    "@nuxt/eslint": "^0.5.0",
-    "eslint": "^9",
-    "typescript": "^5.5.4"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint:fix"
+    "@antfu/eslint-config": "^2.25.1",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "eslint": "^9.9.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0",
+    "vue-tsc": "^2.0.29"
   }
 }
