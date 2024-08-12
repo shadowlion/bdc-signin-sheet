@@ -10,6 +10,11 @@ import SectionHistory from "./components/SectionHistory.vue";
   </fieldset>
   <fieldset>
     <legend>History</legend>
-    <SectionHistory />
+    <Suspense>
+      <SectionHistory />
+      <template #fallback>
+        <p>Loading...</p>
+      </template>
+    </Suspense>
   </fieldset>
 </template>
