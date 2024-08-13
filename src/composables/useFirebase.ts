@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-export function useFirebase() {
+function useFirebase() {
   const firebaseConfig = {
     apiKey: "AIzaSyDnN0vEMeFmFR1sSowpbsCilkq58ZwLspU",
     authDomain: "bdc-signin-sheet.firebaseapp.com",
@@ -17,9 +17,19 @@ export function useFirebase() {
   const firestore = getFirestore(firebaseApp);
   const auth = getAuth(firebaseApp);
 
+  const getDocuments = async <T>(collectionId: string) => {
+    const colRef = collection(firestore, collectionId);
+    const q = query(colRef);
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(d => ({ ...d.data(), uid: d.id } as T));
+  };
+
   return {
     firebaseApp,
     firestore,
     auth,
+    getDocuments,
   };
 }
+
+export default useFirebase;
