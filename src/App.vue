@@ -4,19 +4,21 @@ import SectionHistory from "./components/SectionHistory.vue";
 </script>
 
 <template>
-  <header>
-    <span>Header Section</span>
-  </header>
-  <main class="container">
-    <SectionForm />
-    <Suspense>
-      <SectionHistory />
-      <template #fallback>
-        <article aria-busy="true" />
-      </template>
-    </Suspense>
-  </main>
-  <footer>
-    <span>&copy; {{ new Date().getFullYear() }} USA Dance Charleston</span>
-  </footer>
+  <div class="container">
+    <header>
+      <span>Header Section</span>
+    </header>
+    <main>
+      <SectionForm />
+      <Suspense>
+        <SectionHistory />
+        <template #fallback>
+          <article aria-busy="true" />
+        </template>
+      </Suspense>
+    </main>
+    <footer>
+      <p>&copy; {{ new Date().getFullYear() }} USA Dance Charleston</p>
+    </footer>
+  </div>
 </template>

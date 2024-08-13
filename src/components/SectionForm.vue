@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+const today = new Date().toLocaleDateString();
 const INITIAL_FORM_STATE = {
   names: "", // format: Some Name
   dateStart: "", // format: 13:00
@@ -17,13 +18,19 @@ function handleFormSubmit() {
 
 <template>
   <section>
-    <form @submit.prevent="handleFormSubmit()">
-      <input v-model="formData.names" type="text">
-      <input v-model="formData.dateStart" type="time">
-      <input v-model="formData.dateEnd" type="time">
-      <button type="submit">
-        Submit
-      </button>
-    </form>
+    <article>
+      <header>Sign In Below for {{ today }}:</header>
+      <form @submit.prevent="handleFormSubmit()">
+        <label for="names">Names</label>
+        <input id="names" v-model="formData.names" type="text" aria-label="Names" placeholder="John and Jane Doe">
+        <label for="date-start">Start Time</label>
+        <input id="date-start" v-model="formData.dateStart" type="time" aria-label="Start Time">
+        <label for="date-end">End Time</label>
+        <input id="date-end" v-model="formData.dateEnd" type="time" aria-label="End Time">
+        <button type="submit">
+          Submit
+        </button>
+      </form>
+    </article>
   </section>
 </template>

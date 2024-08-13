@@ -23,23 +23,32 @@ history.value = data;
 
 <template>
   <section>
-    <table>
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Instructor</td>
-          <td>Start Time</td>
-          <td>End Time</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="h in history" :key="h.uid">
-          <td>{{ h.name }}</td>
-          <td>{{ h.instructor }}</td>
-          <td>{{ h.dateStart.toDate() }}</td>
-          <td>{{ h.dateEnd.toDate() }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <article>
+      <header>Most Recent Signins:</header>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th scope="col">
+              Name
+            </th>
+            <th scope="col">
+              Start Time
+            </th>
+            <th scope="col">
+              End Time
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="h in history" :key="h.uid">
+            <th scope="row">
+              {{ h.name }}
+            </th>
+            <td>{{ h.dateStart.toDate().toLocaleString() }}</td>
+            <td>{{ h.dateEnd.toDate().toLocaleString() }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
   </section>
 </template>
