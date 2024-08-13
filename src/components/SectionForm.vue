@@ -1,25 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import useFormStore from "../stores/useFormStore";
 
-const today = new Date().toLocaleDateString();
-const INITIAL_FORM_STATE = {
-  names: "", // format: Some Name
-  dateStart: "", // format: 13:00
-  dateEnd: "", // format: 13:00
-};
-
-const formData = ref(INITIAL_FORM_STATE);
-
-function handleFormSubmit() {
-  // eslint-disable-next-line no-console
-  console.log(JSON.stringify(formData.value));
-}
+const { state: formData, handleFormSubmit } = useFormStore();
 </script>
 
 <template>
   <section>
     <article>
-      <header>Sign In Below for {{ today }}:</header>
+      <header>Sign In Below for {{ new Date().toLocaleDateString() }}:</header>
       <form @submit.prevent="handleFormSubmit()">
         <label for="names">Names</label>
         <input id="names" v-model="formData.names" type="text" aria-label="Names" placeholder="John and Jane Doe">

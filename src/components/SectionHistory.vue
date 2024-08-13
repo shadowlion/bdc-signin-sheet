@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Timestamp } from "firebase/firestore";
-import { collection, getDocs, query } from "firebase/firestore";
-import { useFirebase } from "../composables/useFirebase";
+import useFirebase from "../composables/useFirebase";
 
 interface HistoryDocument {
   dateEnd: Timestamp;
@@ -13,12 +12,8 @@ interface HistoryDocument {
 }
 
 const history = ref<HistoryDocument[]>([]);
-const { firestore } = useFirebase();
-const colRef = collection(firestore, "history");
-const q = query(colRef);
-const snapshot = await getDocs(q);
-const data = snapshot.docs.map(d => ({ ...d.data(), uid: d.id } as HistoryDocument));
-history.value = data;
+const { getDocuments } = useFirebase();
+history.value = await getDocuments<HistoryDocument>("history");
 </script>
 
 <template>

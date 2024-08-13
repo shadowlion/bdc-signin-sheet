@@ -13,7 +13,10 @@ import SectionHistory from "./components/SectionHistory.vue";
       <Suspense>
         <SectionHistory />
         <template #fallback>
-          <article aria-busy="true" />
+          <article>
+            <header>Most Recent Signins:</header>
+            <article aria-busy="true" />
+          </article>
         </template>
       </Suspense>
     </main>
