@@ -12,6 +12,7 @@
     "deploy": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
+    "@picocss/pico": "^2.0.6",
     "firebase": "^10.12.5",
     "vue": "^3.4.37"
   },
