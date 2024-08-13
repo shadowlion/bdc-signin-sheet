@@ -4,17 +4,19 @@ import SectionHistory from "./components/SectionHistory.vue";
 </script>
 
 <template>
-  <fieldset>
-    <legend>Form</legend>
+  <header>
+    <span>Header Section</span>
+  </header>
+  <main class="container">
     <SectionForm />
-  </fieldset>
-  <fieldset>
-    <legend>History</legend>
     <Suspense>
       <SectionHistory />
       <template #fallback>
-        <p>Loading...</p>
+        <article aria-busy="true" />
       </template>
     </Suspense>
-  </fieldset>
+  </main>
+  <footer>
+    <span>&copy; {{ new Date().getFullYear() }} USA Dance Charleston</span>
+  </footer>
 </template>
