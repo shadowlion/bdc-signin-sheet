@@ -17,6 +17,7 @@ jobs:
           version: 9
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entrypoint: .
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BDC_SIGNIN_SHEET }}
           projectId: bdc-signin-sheet
