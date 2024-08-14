@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
-import type { Unsubscribe } from "firebase/firestore";
+import type { Timestamp, Unsubscribe } from "firebase/firestore";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import useFirebase from "../composables/useFirebase";
 import type { HistoryDocument } from "../types";
@@ -30,6 +30,22 @@ onUnmounted(() => {
     unsubscribe();
   }
 });
+
+function getDate(t: Timestamp) {
+  return t.toDate().toLocaleString().split(", ")[0];
+}
+
+function getTime(t: Timestamp) {
+  const date = t.toDate();
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+  hours = hours || 12; // the hour '0' should be '12'
+
+  return `${hours}:${String(minutes).padStart(2, "0")} ${ampm}`;
+}
 </script>
 
 <template>
@@ -41,6 +57,9 @@ onUnmounted(() => {
           <tr>
             <th scope="col">
               Names
+            </th>
+            <th scope="col">
+              Date
             </th>
             <th scope="col">
               Start Time
@@ -55,8 +74,9 @@ onUnmounted(() => {
             <th scope="row">
               {{ h.names }}
             </th>
-            <td>{{ h.datetimeStart.toDate().toLocaleString() }}</td>
-            <td>{{ h.datetimeEnd.toDate().toLocaleString() }}</td>
+            <td>{{ getDate(h.datetimeStart) }}</td>
+            <td>{{ getTime(h.datetimeStart) }}</td>
+            <td>{{ getTime(h.datetimeEnd) }}</td>
           </tr>
         </tbody>
       </table>
