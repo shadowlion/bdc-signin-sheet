@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import type { Unsubscribe } from "firebase/firestore";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import useFirebase from "../composables/useFirebase";
 import type { HistoryDocument } from "../types";
 
 const history = ref<HistoryDocument[]>([]);
 const { firestore } = useFirebase();
 const collectionRef = collection(firestore, "history");
+const q = query(collectionRef, orderBy("datetimeStart", "desc"));
 
 let unsubscribe: Unsubscribe | null;
 
 function setupListener() {
-  unsubscribe = onSnapshot(collectionRef, (snapshot) => {
+  unsubscribe = onSnapshot(q, (snapshot) => {
     history.value = snapshot.docs.map(doc => ({
       uid: doc.id,
       ...doc.data(),
