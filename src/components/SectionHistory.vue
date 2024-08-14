@@ -1,15 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Timestamp } from "firebase/firestore";
 import useFirebase from "../composables/useFirebase";
-
-interface HistoryDocument {
-  dateEnd: Timestamp;
-  dateStart: Timestamp;
-  instructor: string | null;
-  name: string;
-  uid: string;
-}
+import type { HistoryDocument } from "../types";
 
 const history = ref<HistoryDocument[]>([]);
 const { getDocuments } = useFirebase();
@@ -39,8 +31,8 @@ history.value = await getDocuments<HistoryDocument>("history");
             <th scope="row">
               {{ h.name }}
             </th>
-            <td>{{ h.dateStart.toDate().toLocaleString() }}</td>
-            <td>{{ h.dateEnd.toDate().toLocaleString() }}</td>
+            <td>{{ h.datetimeStart.toDate().toLocaleString() }}</td>
+            <td>{{ h.datetimeEnd.toDate().toLocaleString() }}</td>
           </tr>
         </tbody>
       </table>
