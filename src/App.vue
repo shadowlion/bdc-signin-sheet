@@ -5,15 +5,25 @@ import SectionHistory from "./components/SectionHistory.vue";
 
 <template>
   <div class="container">
-    <header>
-      <span>Header Section</span>
+    <header style="text-align: center">
+      <section>
+        <img src="./assets/bdc.webp" alt="Ballroom Dance Charleston sign">
+      </section>
+      <section>
+        <h1>Practice Signin Sheet</h1>
+      </section>
     </header>
     <main>
       <SectionForm />
       <SectionHistory />
     </main>
-    <footer>
-      <p>&copy; {{ new Date().getFullYear() }} USA Dance Charleston</p>
+    <footer style="text-align: center">
+      <p>
+        &copy; {{ new Date().getFullYear() }}
+        <a href="https://ballroomdancecharleston.com" target="_blank">
+          Ballroom Dance Charleston
+        </a>
+      </p>
     </footer>
   </div>
 </template>
