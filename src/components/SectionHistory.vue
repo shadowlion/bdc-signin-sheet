@@ -16,7 +16,7 @@ history.value = await getDocuments<HistoryDocument>("history");
         <thead>
           <tr>
             <th scope="col">
-              Name
+              Names
             </th>
             <th scope="col">
               Start Time
@@ -29,7 +29,7 @@ history.value = await getDocuments<HistoryDocument>("history");
         <tbody>
           <tr v-for="h in history" :key="h.uid">
             <th scope="row">
-              {{ h.name }}
+              {{ h.names }}
             </th>
             <td>{{ h.datetimeStart.toDate().toLocaleString() }}</td>
             <td>{{ h.datetimeEnd.toDate().toLocaleString() }}</td>
