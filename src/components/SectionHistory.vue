@@ -1,11 +1,34 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
+import type { Unsubscribe } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import useFirebase from "../composables/useFirebase";
 import type { HistoryDocument } from "../types";
 
 const history = ref<HistoryDocument[]>([]);
-const { getDocuments } = useFirebase();
-history.value = await getDocuments<HistoryDocument>("history");
+const { firestore } = useFirebase();
+const collectionRef = collection(firestore, "history");
+
+let unsubscribe: Unsubscribe | null;
+
+function setupListener() {
+  unsubscribe = onSnapshot(collectionRef, (snapshot) => {
+    history.value = snapshot.docs.map(doc => ({
+      uid: doc.id,
+      ...doc.data(),
+    } as HistoryDocument));
+  });
+}
+
+onMounted(() => {
+  setupListener();
+});
+
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe();
+  }
+});
 </script>
 
 <template>
