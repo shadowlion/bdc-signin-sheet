@@ -10,15 +10,7 @@ import SectionHistory from "./components/SectionHistory.vue";
     </header>
     <main>
       <SectionForm />
-      <Suspense>
-        <SectionHistory />
-        <template #fallback>
-          <article>
-            <header>Most Recent Signins:</header>
-            <article aria-busy="true" />
-          </article>
-        </template>
-      </Suspense>
+      <SectionHistory />
     </main>
     <footer>
       <p>&copy; {{ new Date().getFullYear() }} USA Dance Charleston</p>

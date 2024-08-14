@@ -5,7 +5,9 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import useFirebase from "../composables/useFirebase";
 import type { HistoryDocument } from "../types";
 
+const loading = ref(true);
 const history = ref<HistoryDocument[]>([]);
+
 const { firestore } = useFirebase();
 const collectionRef = collection(firestore, "history");
 const q = query(collectionRef, orderBy("datetimeStart", "desc"));
@@ -23,6 +25,9 @@ function setupListener() {
 
 onMounted(() => {
   setupListener();
+  setTimeout(() => {
+    loading.value = false;
+  }, 1000);
 });
 
 onUnmounted(() => {
@@ -52,7 +57,7 @@ function getTime(t: Timestamp) {
   <section>
     <article>
       <header>Most Recent Signins:</header>
-      <table class="striped">
+      <table v-if="!loading" class="striped">
         <thead>
           <tr>
             <th scope="col">
@@ -80,6 +85,7 @@ function getTime(t: Timestamp) {
           </tr>
         </tbody>
       </table>
+      <article v-else aria-busy="true" />
     </article>
   </section>
 </template>
